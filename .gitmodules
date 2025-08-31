@@ -1,6 +1,6 @@
 [submodule "submodules/simple-knn"]
 	path = submodules/simple-knn
-	url = https://github.com/golkir/simple-cnn-test.git
+	url = https://github.com/golkir/simple-knn.git
 
 [submodule "submodules/depth-diff-gaussian-rasterization"]
 	path = submodules/depth-diff-gaussian-rasterization
