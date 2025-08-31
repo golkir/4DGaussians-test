@@ -5,12 +5,11 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # System setup
 RUN apt-get update && apt-get install -y \
-    git wget curl ffmpeg libsm6 libxext6 build-essential cmake python3.7 python3.7-venv python3.7-dev \
+    git wget curl ffmpeg libsm6 libxext6 build-essential cmake python3 python3-pip\
     && rm -rf /var/lib/apt/lists/*
 
 # Set up Python environment
-RUN ln -s /usr/bin/python3.7 /usr/bin/python && \
-    curl -sS https://bootstrap.pypa.io/get-pip.py | python
+RUN ln -s /usr/bin/python3 /usr/bin/python
 
 # Copy code
 WORKDIR /app
@@ -19,10 +18,10 @@ RUN git submodule update --init --recursive
 
 # Install Python dependencies
 RUN pip install --upgrade pip && \
-    pip install -r requirements.txt && \
-    pip install -e submodules/depth-diff-gaussian-rasterization && \
-    pip install -e submodules/simple-knn && \
-    pip install torch==1.13.1+cu116 torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu116
+    pip install -r requirements.txt
+    # pip install -e submodules/depth-diff-gaussian-rasterization && \
+    # pip install -e submodules/simple-knn 
+    # pip install torch==1.13.1+cu116 torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu116
 
 RUN pip install fastapi uvicorn pydantic
 

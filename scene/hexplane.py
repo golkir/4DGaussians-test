@@ -79,6 +79,7 @@ def interpolate_ms_features(pts: torch.Tensor,
     coo_combs = list(itertools.combinations(
         range(pts.shape[-1]), grid_dimensions)
     )
+    print(pts.shape)
     if num_levels is None:
         num_levels = len(ms_grids)
     multi_scale_interp = [] if concat_features else 0.
@@ -88,6 +89,7 @@ def interpolate_ms_features(pts: torch.Tensor,
         for ci, coo_comb in enumerate(coo_combs):
             # interpolate in plane
             feature_dim = grid[ci].shape[1]  # shape of grid[ci]: 1, out_dim, *reso
+            print(grid[ci].shape, "shape grid ci")
             interp_out_plane = (
                 grid_sample_wrapper(grid[ci], pts[..., coo_comb])
                 .view(-1, feature_dim)
